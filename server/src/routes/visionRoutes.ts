@@ -1,11 +1,8 @@
 import { Router } from "express";
+import { analyzeImage } from "../controllers/visionController";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.json({
-        message: "Vision route working",
-    });
-});
+router.post("/", analyzeImage);
 
 export default router;

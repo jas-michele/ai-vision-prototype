@@ -7,9 +7,14 @@ export const analyzeImage = async (
     res: Response
 ) => {
 
-  console.log(req.file);
-  
-  const result = await analyzeVision();
+    if (!req.file) {
+        return res.status(400).json({
+            success: false,
+            message: "No image uploaded."
+        })
+    }
+
+  const result = await analyzeVision(req.file.buffer);
 
     res.status(200).json(result);
 };

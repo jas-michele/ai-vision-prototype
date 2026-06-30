@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 
 function CameraCapture() {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const [stream, setStream] = useState<MediaStream | null>(null);
 
@@ -42,6 +43,11 @@ function CameraCapture() {
                     muted
                     width="100%"
                 />
+
+                <canvas
+                    ref={canvasRef}
+                    style={{ display: "none" }}
+                />    
 
                 <div className="button-group">
                     <button

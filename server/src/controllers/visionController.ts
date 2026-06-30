@@ -7,6 +7,8 @@ export const analyzeImage = async (
     res: Response
 ) => {
 
+  console.log(req.file);
+  
   const result = await analyzeVision();
 
     res.status(200).json(result);

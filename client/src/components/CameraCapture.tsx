@@ -32,6 +32,29 @@ function CameraCapture() {
             setStream(null);
         };
 
+        const captureImage = () => {
+            const video = videoRef.current;
+            const canvas = canvasRef.current;
+
+            if (!video || !canvas) return;
+
+            const context = canvas.getContext("2d");
+
+            if (!context) return;
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            )
+
+        };
+
         return (
             <section className="card">
                 <h1>Live Camera</h1>
@@ -62,7 +85,11 @@ function CameraCapture() {
                         disabled={!stream}
                     >
                         Stop Camera
-                    </button>    
+                    </button>   
+
+                    <button onClick={captureImage}>
+                        Capture Image
+                    </button> 
                 </div>    
             </section>
         )

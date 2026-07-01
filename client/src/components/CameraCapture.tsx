@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { analyzeImage } from "../api/visionApi";
 
 function CameraCapture() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -52,6 +53,22 @@ function CameraCapture() {
                 canvas.width,
                 canvas.height
             )
+
+            canvas.toBlob(async (blob) => {
+                if (!blob) return;
+
+                const file = new File(
+                    [blob],
+                    "webcam-capture.png",
+                    {
+                        type: "image/png",
+                    }
+                );
+
+                const result = await analyzeImage(file);
+
+                console.log(result);
+            }, "image/png" );
 
         };
 
